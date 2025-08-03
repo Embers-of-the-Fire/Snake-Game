@@ -19,16 +19,14 @@ format_file() {
 is_need_format() {
     need=1
     file=$1
-
-    // ignore /test/*
+    
     if [[ "${file}" == */test/* ]]; then
         need=0
     fi
 
     if [[ $need -eq 1 ]]; then
         # only c/c++ source file
-        if [ x"${file##*.}" != x"cpp" -a x"${file##*.}" != x"h" ]; then
-            #echo "not cpp source"
+        if [ x"${file##*.}" != x"cpp" -a x"${file##*.}" != x"hpp" ]; then
             need=0
         fi
     fi

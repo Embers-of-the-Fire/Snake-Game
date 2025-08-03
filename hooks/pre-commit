@@ -1,0 +1,51 @@
+#!/bin/bash
+
+STYLE=$(git rev-parse --show-toplevel)/.clang-format
+if [ -n "${STYLE}" ] ; then
+    STYLEARG="-style=file"
+else
+    STYLEARG=""
+fi
+
+format_file() {
+    file="${1}"
+    if [ ! -z "${STYLEARG}" ]; then
+        #echo "format ${file}"
+        clang-format -i ${STYLEARG} ${1}
+        git add ${1}
+    fi
+}
+
+is_need_format() {
+    need=1
+    file=$1
+
+    // ignore /test/*
+    if [[ "${file}" == */test/* ]]; then
+        need=0
+    fi
+
+    if [[ $need -eq 1 ]]; then
+        # only c/c++ source file
+        if [ x"${file##*.}" != x"cpp" -a x"${file##*.}" != x"h" ]; then
+            #echo "not cpp source"
+            need=0
+        fi
+    fi
+
+    return $need
+}
+
+case "${1}" in
+    --about )
+        echo "Runs clang-format on source files"
+        ;;
+    * )
+        for file in `git diff-index --cached --name-only HEAD` ; do
+            is_need_format ${file}
+            if [[ $? -eq 1 ]]; then
+                format_file "${file}"
+            fi
+        done
+        ;;
+esac

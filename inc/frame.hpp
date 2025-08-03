@@ -23,6 +23,9 @@ public:
     // and removal from the back.
     geo::Points snake_body;
 
+    uint32_t score;
+    uint32_t tick;
+
     Frame(
         const uint32_t w, const uint32_t h, const MoveDirection dir,
         const geo::Point& initial_snake_head)
@@ -31,7 +34,9 @@ public:
         , direction(dir)
         , apples()
         , snake_head(initial_snake_head)
-        , snake_body() {}
+        , snake_body()
+        , score(0)
+        , tick(0) {}
 
     Frame(const Frame&) = default;
     Frame& operator=(const Frame&) = default;
@@ -39,7 +44,7 @@ public:
     Frame& operator=(Frame&&) = default;
     ~Frame() = default;
 
-    Frame next_frame() const;
+    Frame next_frame(const geo::GeoGraph& graph) const;
     std::string to_string() const;
 };
 

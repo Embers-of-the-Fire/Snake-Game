@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <deque>
 #include <fmt/core.h>
+#include <random>
 #include <string>
 #include <utility>
 
@@ -16,10 +17,19 @@ class GeoGraph {
     uint32_t width;
     uint32_t height;
 
+    mutable std::mt19937 gen;
+    mutable std::uniform_int_distribution<uint32_t> dist_x;
+    mutable std::uniform_int_distribution<uint32_t> dist_y;
+
 public:
     GeoGraph(const uint32_t w, const uint32_t h)
         : width(w)
-        , height(h) {}
+        , height(h) {
+        std::random_device rd;
+        gen = std::mt19937{rd()};
+        dist_x = std::uniform_int_distribution<uint32_t>(0, w - 1);
+        dist_y = std::uniform_int_distribution<uint32_t>(0, h - 1);
+    }
 
     ~GeoGraph() = default;
 

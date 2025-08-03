@@ -31,7 +31,7 @@ Point GeoGraph::get_bottom_of(const Point& p) const {
     return {p.first, p.second + 1};
 }
 
-Point GeoGraph::get_random_point() const { return {rand() % width, rand() % height}; }
+Point GeoGraph::get_random_point() const { return {dist_x(gen), dist_y(gen)}; }
 
 std::string GeoGraph::to_string() const {
     return fmt::format("GeoGraph(width={}, height={})", width, height);

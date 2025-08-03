@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <fmt/core.h>
+#include <iostream>
 #include <string>
 
 namespace game {
@@ -25,10 +26,18 @@ public:
         , height(h)
         , ui_handler(w, h)
         , graph(w, h)
-        , current_frame(w, h, frame::MoveDirection::RIGHT, {w / 2, h / 2}) {}
+        , current_frame(w, h, frame::MoveDirection::RIGHT, {w / 2, h / 2}) {
+        const auto rp = graph.get_random_point();
+        std::cout << fmt::format("{}", rp) << std::endl;
+        current_frame.apples.push_back(rp);
+    }
 
     const frame::Frame& get_current_frame() const;
+
+    void add_apple(const geo::Point& apple);
+    void set_direction(const frame::MoveDirection dir);
     void print_frame() const;
+    void next_frame();
 
     std::string to_string() const;
 };

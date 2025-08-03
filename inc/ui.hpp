@@ -1,6 +1,7 @@
 #ifndef UI_H
 #define UI_H
 
+#include "inc/frame.hpp"
 #include "inc/geo.hpp"
 
 #include <cstdint>
@@ -15,11 +16,13 @@ public:
     uint32_t width;
     uint32_t height;
 
-    UIHandler(const uint32_t w = 60, const uint32_t h = 60)
+    UIHandler(const uint32_t w, const uint32_t h)
         : width(w)
         , height(h) {}
 
     ~UIHandler() = default;
+
+    void print_frame(const frame::Frame& frame) const;
 
     std::string to_string() const;
 };

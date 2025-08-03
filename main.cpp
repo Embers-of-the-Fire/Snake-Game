@@ -4,7 +4,13 @@
 #include "inc/game.hpp"
 
 int main(int, char**) {
-    const game::GameHandler game_handler(60, 60);
+    std::wcout.imbue(std::locale("en_US.UTF-8")); // Set locale for wide character output
+
+    const game::GameHandler game_handler(11, 11);
 
     fmt::print("Game: {}\n", game_handler);
+
+    std::cout << "Hello, world 🍎!" << std::endl;
+
+    game_handler.print_frame();
 }

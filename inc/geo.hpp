@@ -2,14 +2,67 @@
 #define GEO_H
 
 #include <cstdint>
+#include <deque>
+#include <fmt/core.h>
+#include <string>
 #include <utility>
-#include <vector>
 
 namespace geo {
 
-using Point = std::pair<int32_t, int32_t>;
-using Points = std::vector<Point>;
+using Point = std::pair<uint32_t, uint32_t>;
+using Points = std::deque<Point>;
 
+class GeoGraph {
+    uint32_t width;
+    uint32_t height;
+
+public:
+    GeoGraph(const uint32_t w, const uint32_t h)
+        : width(w)
+        , height(h) {}
+
+    ~GeoGraph() = default;
+
+    Point get_left_of(const Point& p) const;
+
+    Point get_right_of(const Point& p) const;
+
+    Point get_top_of(const Point& p) const;
+
+    Point get_bottom_of(const Point& p) const;
+
+    Point get_random_point() const;
+
+    std::string to_string() const;
+};
+
+std::string to_string(const Point& p);
+std::string to_string(const Points& ps);
+
+} // namespace geo
+
+template <>
+struct fmt::formatter<geo::GeoGraph> : fmt::formatter<std::string> {
+    template <typename FormatContext>
+    auto format(const geo::GeoGraph& g, FormatContext& ctx) const {
+        return fmt::formatter<std::string>::format(g.to_string(), ctx);
+    }
+};
+
+template <>
+struct fmt::formatter<geo::Point> : fmt::formatter<std::string> {
+    template <typename FormatContext>
+    auto format(const geo::Point& p, FormatContext& ctx) const {
+        return fmt::formatter<std::string>::format(geo::to_string(p), ctx);
+    }
+};
+
+template <>
+struct fmt::formatter<geo::Points> : fmt::formatter<std::string> {
+    template <typename FormatContext>
+    auto format(const geo::Points& ps, FormatContext& ctx) const {
+        return fmt::formatter<std::string>::format(geo::to_string(ps), ctx);
+    }
 };
 
 #endif // GEO_H

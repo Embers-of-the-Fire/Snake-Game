@@ -1,11 +1,10 @@
-#include <iostream>
 #include <fmt/core.h>
+#include <iostream>
 
-#include <inc/ui.hpp>
-#include <inc/geo.hpp>
+#include "inc/game.hpp"
 
 int main(int, char**) {
-    const ui::UIHandler ui_handler(80, 40);
+    const game::GameHandler game_handler(60, 60);
 
-    fmt::print("UIHandler: {}\n", ui_handler);
+    fmt::print("Game: {}\n", game_handler);
 }

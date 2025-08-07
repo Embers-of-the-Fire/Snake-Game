@@ -23,7 +23,13 @@ void game::GameHandler::print_frame() const {
     std::cout.flush();
 }
 
-void game::GameHandler::next_frame() { current_frame = current_frame.next_frame(graph); }
+frame::FrameValidity game::GameHandler::next_frame() {
+    const auto validity = current_frame.will_be_valid();
+    if (validity != frame::FrameValidity::Valid)
+        return validity;
+    current_frame = current_frame.next_frame(graph);
+    return frame::FrameValidity::Valid;
+}
 
 std::string game::GameHandler::to_string() const {
     return fmt::format(

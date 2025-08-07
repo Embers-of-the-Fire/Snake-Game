@@ -10,6 +10,12 @@ namespace frame {
 
 enum class MoveDirection { UP, DOWN, LEFT, RIGHT };
 
+enum class FrameValidity {
+    Valid,
+    HitBorder,
+    HitSelf,
+};
+
 class Frame {
 public:
     uint32_t width;
@@ -45,6 +51,7 @@ public:
     ~Frame() = default;
 
     Frame next_frame(const geo::GeoGraph& graph) const;
+    FrameValidity will_be_valid() const;
     std::string to_string() const;
 };
 

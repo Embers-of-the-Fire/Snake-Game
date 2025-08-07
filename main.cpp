@@ -21,14 +21,15 @@ int main(int, char**) {
     int32_t score = 0;
 
     for (int i = 0; i < 100; ++i) {
-        game_handler.next_frame();
+        const auto validity = game_handler.next_frame();
+        if (validity != frame::FrameValidity::Valid) {
+            std::cout << "\x1B[2J\x1B[H";         // Clear the console
+            std::cout << "Game Over! Validity: " << static_cast<int>(validity) << std::endl;
+            break;
+        }
         game_handler.print_frame();
         if (game_handler.get_current_frame().score > score) {
             frame::MoveDirection dir;
-            do {
-                dir = static_cast<frame::MoveDirection>(std::rand() % 4);
-            } while (dir == game_handler.get_current_frame().direction);
-            game_handler.set_direction(dir);
             score = game_handler.get_current_frame().score;
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(500));

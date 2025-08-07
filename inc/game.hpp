@@ -11,6 +11,7 @@
 #include <string>
 
 namespace game {
+
 class GameHandler {
     uint32_t width;
     uint32_t height;
@@ -37,7 +38,7 @@ public:
     void add_apple(const geo::Point& apple);
     void set_direction(const frame::MoveDirection dir);
     void print_frame() const;
-    void next_frame();
+    frame::FrameValidity next_frame();
 
     std::string to_string() const;
 };

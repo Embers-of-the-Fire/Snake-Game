@@ -21,7 +21,7 @@ constexpr std::string ICON_SNAKE_HEAD_UP = ICON_SNAKE_HEAD;
 constexpr std::string ICON_SNAKE_HEAD_DOWN = ICON_SNAKE_HEAD;
 constexpr std::string ICON_SNAKE_HEAD_LEFT = ICON_SNAKE_HEAD;
 constexpr std::string ICON_SNAKE_HEAD_RIGHT = ICON_SNAKE_HEAD;
-constexpr std::string ICON_SNAKE_BODY = "██";
+constexpr std::string ICON_SNAKE_BODY = "\033[32m██\033[0m";
 
 void UIHandler::print_frame(const frame::Frame& frame) const {
     fmt::print(

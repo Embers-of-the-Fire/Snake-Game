@@ -74,3 +74,14 @@ std::string frame::Frame::to_string() const {
         height, static_cast<int>(direction), geo::to_string(apples), geo::to_string(snake_head),
         geo::to_string(snake_body));
 }
+
+std::string frame::describe_validity(const frame::FrameValidity validity) {
+    // clang-format off
+    switch (validity) {
+    case FrameValidity::Valid:      return "Valid";
+    case FrameValidity::HitBorder:  return "Hit Border";
+    case FrameValidity::HitSelf:    return "Hit Self";
+    default:                        return "Unknown Validity";
+    }
+    // clang-format on
+}

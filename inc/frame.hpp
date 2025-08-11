@@ -16,6 +16,8 @@ enum class FrameValidity {
     HitSelf,
 };
 
+std::string describe_validity(const FrameValidity validity);
+
 class Frame {
 public:
     uint32_t width;

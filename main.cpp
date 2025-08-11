@@ -1,6 +1,7 @@
 #include <fmt/core.h>
 #include <iostream>
 
+#include "inc/frame.hpp"
 #include "inc/game.hpp"
 
 #include <cstdint>
@@ -24,7 +25,7 @@ int main(int, char**) {
         const auto validity = game_handler.next_frame();
         if (validity != frame::FrameValidity::Valid) {
             std::cout << "\x1B[2J\x1B[H";         // Clear the console
-            std::cout << "Game Over! Validity: " << static_cast<int>(validity) << std::endl;
+            std::cout << "Game Over: " << frame::describe_validity(validity) << std::endl;
             break;
         }
         game_handler.print_frame();

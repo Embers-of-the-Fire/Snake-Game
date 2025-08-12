@@ -11,5 +11,8 @@ find_package(fmt REQUIRED)
 add_executable(snake main.cpp)
 
 target_link_libraries(snake PRIVATE fmt::fmt)
-target_sources(snake PRIVATE src/ui.cpp src/geo.cpp src/game.cpp src/frame.cpp)
+
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+target_sources(snake PRIVATE ${SOURCES})
 target_include_directories(snake PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/inc)

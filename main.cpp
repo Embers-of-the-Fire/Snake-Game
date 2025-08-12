@@ -1,6 +1,7 @@
 #include <fmt/core.h>
 #include <iostream>
 
+#include "inc/ai.hpp"
 #include "inc/frame.hpp"
 #include "inc/game.hpp"
 
@@ -21,7 +22,10 @@ int main(int, char**) {
 
     int32_t score = 0;
 
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 1000; ++i) {
+        if (auto dir = ai::next_move_astar(game_handler.get_current_frame())) {
+            game_handler.set_direction(*dir);
+        }
         const auto validity = game_handler.next_frame();
         if (validity != frame::FrameValidity::Valid) {
             std::cout << "\x1B[2J\x1B[H";         // Clear the console
@@ -33,6 +37,6 @@ int main(int, char**) {
             frame::MoveDirection dir;
             score = game_handler.get_current_frame().score;
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 }

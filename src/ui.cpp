@@ -16,7 +16,7 @@ constexpr std::string FRAME_VERTICAL = "║";
 constexpr std::string FRAME_FILL = "  ";
 
 constexpr std::string ICON_APPLE = "🍎";
-constexpr std::string ICON_SNAKE_HEAD = "🐍";
+constexpr std::string ICON_SNAKE_HEAD = "🐍"; // No better emoji to indicate move direction :sad:
 constexpr std::string ICON_SNAKE_HEAD_UP = ICON_SNAKE_HEAD;
 constexpr std::string ICON_SNAKE_HEAD_DOWN = ICON_SNAKE_HEAD;
 constexpr std::string ICON_SNAKE_HEAD_LEFT = ICON_SNAKE_HEAD;

@@ -5,28 +5,28 @@ namespace geo {
 
 Point GeoGraph::get_left_of(const Point& p) const {
     if (p.first == 0) {
-        return {width - 1, p.second};
+        return {0, p.second};
     }
     return {p.first - 1, p.second};
 }
 
 Point GeoGraph::get_right_of(const Point& p) const {
     if (p.first == width - 1) {
-        return {0, p.second};
+        return {width - 1, p.second};
     }
     return {p.first + 1, p.second};
 }
 
 Point GeoGraph::get_top_of(const Point& p) const {
     if (p.second == 0) {
-        return {p.first, height - 1};
+        return {p.first, 0};
     }
     return {p.first, p.second - 1};
 }
 
 Point GeoGraph::get_bottom_of(const Point& p) const {
     if (p.second == height - 1) {
-        return {p.first, 0};
+        return {p.first, height - 1};
     }
     return {p.first, p.second + 1};
 }
